@@ -12,23 +12,23 @@ namespace Lab_day2
         static void Main(string[] args)
         {
             //Accumulation
-            double deposit = 35;
-            int years = 0;
+            double deposit = 35; //use a double or float for the deposit
+            int years = 0; //use an integer for years
 
             years = 1;
-            Console.WriteLine("The amount of money the woman has after depositing for " + years + " year(s), without accounting for leap years, is $" + Math.Round((deposit * years * 365)));
+            Console.WriteLine("The amount of money the woman has after depositing for " + years + " year(s), without accounting for leap years, is " + Math.Round((deposit * years * 365), 2).ToString("c2"));
             Console.WriteLine();
 
             years = 2;
-            Console.WriteLine("The amount of money the woman has after depositing for " + years + " year(s), without accounting for leap years, is $" + Math.Round((deposit * years * 365)));
+            Console.WriteLine("The amount of money the woman has after depositing for " + years + " year(s), without accounting for leap years, is " + Math.Round((deposit * years * 365),2).ToString("c2"));
             Console.WriteLine();
 
             years = 5;
-            Console.WriteLine("The amount of money the woman has after depositing for " + years + " year(s), without accounting for leap years, is $" + Math.Round((deposit * years * 365)));
+            Console.WriteLine("The amount of money the woman has after depositing for " + years + " year(s), without accounting for leap years, is " + Math.Round((deposit * years * 365),2).ToString("c2"));
             Console.WriteLine();
 
             years = 10;
-            Console.WriteLine("The amount of money the woman has after depositing for " + years + " year(s), without accounting for leap years, is $" + Math.Round((deposit * years * 365)));
+            Console.WriteLine("The amount of money the woman has after depositing for " + years + " year(s), without accounting for leap years, is " + Math.Round((deposit * years * 365),2).ToString("c2"));
             Console.WriteLine();
 
             Console.Read();
@@ -39,7 +39,7 @@ namespace Lab_day2
             try
             {
                 bool success = false;
-                int width = 0, length = 0, perimeter = 0, tempnum = 0;
+                double width = 0, length = 0, perimeter = 0, tempnum = 0;
                 double area = 0, cost = 0;
                 string tempString = "";
 
@@ -48,7 +48,7 @@ namespace Lab_day2
 
                     Console.WriteLine("Enter the width in yards of the land you wish to purchase");
                     tempString = Console.ReadLine();
-                    success = int.TryParse(tempString, out tempnum);
+                    success = double.TryParse(tempString, out tempnum);
 
                 }
                 width = tempnum;
@@ -59,7 +59,7 @@ namespace Lab_day2
 
                     Console.WriteLine("Enter the length in yards of the land you wish to purchase");
                     tempString = Console.ReadLine();
-                    success = int.TryParse(tempString, out tempnum);
+                    success = double.TryParse(tempString, out tempnum);
 
                 }
                 length = tempnum;
@@ -88,18 +88,18 @@ namespace Lab_day2
             minutes = 5;
             seconds = minutes * 60;
 
-            velocity = velocity + (seconds / 2) * (1 + acceleration);
+            velocity = velocity + velocity * (seconds / 2) * ( acceleration);
 
             Console.WriteLine("The velocity of the ship after 5 minutes of continous boosters is " + velocity);
             Console.WriteLine();
 
             velocity = 10000;
             minutes = 120;
-            seconds = minutes * 60;
+            //seconds = minutes * 60;
 
             while(minutes > 0)
             {
-                velocity = velocity + (60 / 2 * 5) * (1 + acceleration);
+                velocity = velocity + velocity * (60 / 2 * 5) * (acceleration);
                 minutes = minutes - 15;
                 
                 //minutes = minutes - 5;
@@ -134,21 +134,21 @@ namespace Lab_day2
 
             bool checkX1 = false;
             bool checkX2 = false;
-            int checknum = 0;
+            double checknum = 0;
 
             try
             {
                 x1 = (-b + Math.Sqrt(b * b - (4 * a * c)))/ (2 * a);
                 x2 = (-b - Math.Sqrt(b * b - (4 * a * c))) / (2 * a);
+                
+                checkX1 = double.TryParse(x1.ToString(), out checknum);
+                checkX2 = double.TryParse(x2.ToString(), out checknum);
 
-                checkX1 = int.TryParse(x1.ToString(), out checknum);
-                checkX2 = int.TryParse(x2.ToString(), out checknum);
-
-                if (checkX1 && checkX2)
+                if (checkX1 && checkX2 && x1 != x2 && !double.IsNaN(x1) && !double.IsNaN(x2))
                     Console.WriteLine("The two values for x are " + x1 + ", and " + x2);
-                else if (checkX1 && !checkX2)
+                else if (checkX1 && !checkX2 || x1 == x2 && checkX1 && checkX2 && !double.IsNaN(x1) && !double.IsNaN(x2))
                     Console.WriteLine("there is only one solution, and it is x = " + x1);
-                else if (checkX2 && !checkX2)
+                else if (checkX2 && !checkX1 || x1 == x2 && checkX1 && checkX2 && !double.IsNaN(x1) && !double.IsNaN(x2))
                     Console.WriteLine("there is only one solution, and it is x = " + x2);
                 else
                     Console.WriteLine("The equation has no solution");
